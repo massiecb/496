@@ -1,19 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <CardCollection>
-    <Creature>
-        <Creature name = "Creature Test A">
-	    <ImagePath> "Path/To/Image" </ImagePath>
-	    <FlavourText> "Text Stuff" </FlavourText>
+        <Creature Name = "Creature Test A" ImagePath = "Path/toImage" FlavourText = "Text Stuff">
 	</Creature>
-
-	<Creature name = "Creature test A">
-	    <ImagePath> "/Another/Path" </ImagePath>
-	    <FlavourText> "Copy of A, shouldn't be addable" </FlavourText>
+	<Creature Name = "Creature test A" ImagePath = "/Another/Path" FlavourText = "Copy of A, shoudlnt be addable">
 	</Creature>
-	<Creature name = "Creature Test B">
-	    <ImagePath> "Path/To/Image" </ImagePath>
-	    <FlavourText> "Text" </FlavourText>
+	<Creature Name = "Creature Test B" ImagePath = "Path/To/Image" FlavourText = "text">
 	</Creature>
-	<Creature name = "Creature Test C">
-	    <ImagePath> "Path/to/image" </ImagePath>
-	    <FlavourText> "Text" </FlavourText>
+	<Creature Name = "Creature Test C" ImagePath = "Path/to/image" FlavourText = "text">
 	</Creature>
+	<Creature Name = "Creature Test D" ImagePath = "Path/toImage" FlavourText = "Text">
+	</Creature>
+</CardCollection>
