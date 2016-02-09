@@ -25,14 +25,14 @@
 	    AT = "phyiscal" HP = "1" AV = "1" SV = "0" />
   <Creature Name = "Medium Guy"  Flavour = "A small step for a smallie..." Ability = "none" CardEffect = "Health Boost" ST = "fire"
 	    AT = "physical" HP = "1" AV = "2" SV = "1" />
-  <Creature Nmae = "Caster" Flavour = "Zounds!" Ability = "Pump Up" CardEffect = "Fireball" ST = "physical"
+  <Creature Name = "Caster" Flavour = "Zounds!" Ability = "Pump Up" CardEffect = "Fireball" ST = "physical"
 	    AT = "phyiscal" HP = "1" AV = "1" SV = "1" />
   
   <CardAbility Name ="Swap" ST ="none" AT = "phyiscal" SV = "0" AV = "1" HP="-1" Duration="0"/>
   <CardAbility Name ="Firey Stamina" ST="fire" AT="none" SV="1" AV="0" HP="0" Duration="0" />
   <CardEffect  Name ="Health Boost" ST="none" AT="none" SV="-1" AV="0" HP="1" Duration="0" />
   <CardAbility Name ="Pump Up" ST="none" AT="none" SV="0" AV="1" HP="0" Duration="1" />
-  <CardEffect Name = "Fireball" ST="none" AT="fire" SV="0" AV="1" Hp="0" Duration="0" />
+  <CardEffect Name = "Fireball" ST="none" AT="fire" SV="0" AV="1" HP="0" Duration="0" />
 
   <SpellEffect Name = "Burn" AT= "physical" AV="2"/>
   <SpellEffect Name = "Literal Burn" AT= "fire" AV = "2" />
