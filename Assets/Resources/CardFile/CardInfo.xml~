@@ -1,3 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CardCollection>
-  <Creature Name = "Big Fun Boy" 
+  <Spell Name = "Counter Spell" Flavour = "Only Jerks splash blue" Description = "Causes target spell to not occur"/>
+  <Spell Name = "Burn" Flavour = "It doesn't cook" Description = "Deals two damage to target" />
+  <Spell Name = "Literal Burn" Flavour = "Meat, Fire, Good" Description = "Deals two fire damage" />
+  <Spell Name = "Freeze" Flavour = "Freezies aren't as good as you think" Description = "Stops target creature from doing any action" />
+  <Spell Name = "AOE" Flavour = "AOE OP LMAO" Description = "Deal one damage to all enemy creatures" />
+
+  <Arms Name = "Fire Shield" Flavour = "Some like it hot" Description = "Gives target Creature +4 Shield against fire"
+	AT = "none" ST = "fire" HPboost = "0" Aboost = "0" Sboost = "4" />
+  <Arms Name = "Give Me Steel" Flavour = "I like Hearthstone card sounds" Description = "Gives target Creature +2 physical damage"
+	AT = "physical" ST = "none" HPboost = "0" Aboost = "2" Sboost = "0" />
+  <Arms Name = "My Kingdom for a Shield" Flavour = "Richard III, I think. He didn't get what he wanted either" Description = "Gives target Creature +2 Health"
+	AT = "none" ST = "none" HPboost = "2" Aboost = "0" Sboost = "0" />
+  <Arms Name = "Power Over Whelming" Flavour = "My life for Aiur!" Description = "Gives target Creature +4 phyiscal damage, +4 health"
+	AT = "physical" ST = "none" HPboost = "4" Aboost = "4" Sboost = "0" />
+  <Arms Name = "Torch" Flavour = "Roasty Toasty" Description = "Changes target Creatures Attack Type to Fire"
+	AT = "fire" ST = "none" HPboost = "0" Aboost = "0" Sboost = "0" />
+
+  <Creature Name = "Big Friendly Guy" Flavour = "Every game needs a BFG" Ability = "none" CardEffect = "Swap" ST = "none"
+	    AT = "physical" HP = "3" AV = "4" SV = "0" />
+  <Creature Name = "Standard Smallie" Flavour = "Your Pawn" Ability = "none" CardEffect = "none" ST = "none"
+	    AT = "physical" HP = "1" AV = "1" SV = "0" />
+  <Creature Name = "Not as Standard Smallie" Flavour = "A variation on a theme" Ability = "Firey Stamina" CardEffect = "none" ST = "none"
+	    AT = "phyiscal" HP = "1" AV = "1" SV = "0" />
+  <Creature Name = "Medium Guy"  Flavour = "A small step for a smallie..." Ability = "none" CardEffect = "Health Boost" ST = "fire"
+	    AT = "physical" HP = "1" AV = "2" SV = "1" />
+  <Creature Nmae = "Caster" Flavour = "Zounds!" Ability = "Pump Up" CardEffect = "Fireball" ST = "physical"
+	    AT = "phyiscal" HP = "1" AV = "1" SV = "1" />
+  
+  <CardAbility Name ="Swap" ST ="none" AT = "phyiscal" SV = "0" AV = "1" HP="-1" Duration="none"/>
+  <CardAbility Name ="Firey Stamina" ST="fire" AT="none" SV="1" AV="0" HP="0" Duration="none" />
+  <CardEffect  Name ="Health Boost" ST="none" AT="none" SV="-1" AV="0" HP="1" Duration="none" />
+  <CardAbility Name ="Pump Up" ST="none" AT="none" SV="0" AV="1" HP="0" Duration="0" />
+  <CardEffect Name = "Fireball" ST="none" AT="fire" SV="0" AV="1" Hp="0" Duration="none" />
+
+  <SpellEffect Name = "Burn" AT= "physical" AV="2"/>
+  <SpellEffect Name = "Literal Burn" AT= "fire" AV = "2" />
+  <SpellEffect Name = "AOE" AT="physical" AV ="1" />
+</CardCollection>

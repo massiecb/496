@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Xml;
+using System.IO;
 
 /* Cards:
  *	Creatures:
@@ -39,11 +42,11 @@ public class CardLoader : MonoBehaviour {
 	 * 		
 	 */
 
-	public class CreatureCards {
+	public class CreatureCard {
 		public string Name, Ability, CardEffect, ST, AT, Flavour;
 		public int HP, AV, SV;
 
-		public CreatureCards (string n, string a, string ce, string st, string at, string f, int hp, int av, int sv){
+		public CreatureCard (string n, string a, string ce, string st, string at, string f, int hp, int av, int sv){
 			Name = n;
 			Ability = a;
 			CardEffect = ce;
@@ -99,10 +102,10 @@ public class CardLoader : MonoBehaviour {
 		}
 	}
 
-	public class SpellCards{
+	public class SpellCard{
 		public string Name, Flavour, Description;
 
-		public SpellCards (string n, string f, string d){
+		public SpellCard (string n, string f, string d){
 			Name = n;
 			Flavour = f;
 			Description = d;
@@ -117,11 +120,11 @@ public class CardLoader : MonoBehaviour {
 			return Description;
 		}
 	}
-	public class ArmsCards{
-		public string Name, Flavour, AT, ST;
+	public class ArmsCard{
+		public string Name, Flavour, AT, ST, Description;
 		public int HPboost, Aboost, Sboost;
 
-		public ArmsCards(string n, string f, string at, string st, int hpb, int ab, int sb){
+		public ArmsCard(string n, string f, string at, string st, string d, int hpb, int ab, int sb){
 			Name = n;
 			Flavour = f;
 			AT = at;
@@ -129,6 +132,7 @@ public class CardLoader : MonoBehaviour {
 			HPboost = hpb;
 			Aboost = ab;
 			Sboost = sb;
+			Description = d;
 		}
 		public string getName(){
 			return Name;
@@ -142,6 +146,9 @@ public class CardLoader : MonoBehaviour {
 		public string getShieldType(){
 			return ST;
 		}
+		public string getDescription(){
+			return Description;
+		}
 		public int getHPBoost(){
 			return HPboost;
 		}
@@ -153,11 +160,147 @@ public class CardLoader : MonoBehaviour {
 		}
 
 	}
+	public class CardAbility {
+		public string Name, ST, AT;
+		public int SV, AV, Duration, HP;
 
+		public CardAbility (string n, string st, string at, int sv, int av, int d, int hp){
+			Name = n;
+			AT = at;
+			ST = st;
+			SV = sv;
+			AV = av;
+			Duration = d;
+			HP = hp;
+		}
+		public string getName(){
+			return Name;
+		}
+		public string getShieldType(){
+			return ST;
+		}
+		public string getAttackType(){
+			return AT;
+		}
+		public int getShieldValue(){
+			return SV;
+		}
+		public int getAttackValue(){
+			return AV;
+		}
+		public int getDuration(){
+			return Duration;
+		}
+		public int getHPEffect(){
+			return HP;
+		}
+	}
+	public class CardEffect{
+		public string Name, ST, AT;
+		public int SV, AV, Duration, HP;
+
+		public CardEffect (string n, string st, string at, int sv, int av, int d, int hp){
+			Name = n;
+			AT = at;
+			ST = st;
+			SV = sv;
+			AV = av;
+			Duration = d;
+			HP = hp;
+		}
+		public string getName(){
+			return Name;
+		}
+		public string getShieldType(){
+			return ST;
+		}
+		public string getAttackType(){
+			return AT;
+		}
+		public int getShieldValue(){
+			return SV;
+		}
+		public int getAttackValue(){
+			return AV;
+		}
+		public int getDuration(){
+			return Duration;
+		}
+		public int getHPEffect(){
+			return HP;
+		}
+	}
+	public class SpellEffect{
+		string Name, AT;
+		int AV;
+		public SpellEffect (string n, string at, int av){
+			Name = n;
+			AT = at;
+			AV = av;
+		}
+		public string getName(){
+			return Name;
+		}
+		public string getAttackType(){
+			return AT;
+		}
+		public int getAttackValue(){
+			return AV;
+		}
+	}
+	public static Dictionary <string, SpellEffect> spellEffects;
+	public static Dictionary <string, SpellCard> spellCards;
+	public static Dictionary <string, CreatureCard> creatureCards;
+	public static Dictionary <string, ArmsCard> armsCards;
+	public static Dictionary <string, CardEffect> effects;
+	public static Dictionary <string, CardAbility> abilities;
 	
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		TextAsset cards = Resources.Load ("CardFile/CardInfo.xml") as TextAsset;
+		using (XmlReader reader = XmlReader.Create (new StringReader (cards.text))) {
+			XmlWriterSettings ws = new XmlWriterSettings ();
+			ws.Indent = true;
+			while (reader.Read ()) {
+				switch (reader.NodeType) {
+				case XmlNodeType.Element:
+					switch (reader.Name) {
+					case "Spell":
+						spellCards.Add (reader.GetAttribute ("Name"), new SpellCard (reader.GetAttribute ("Name"), reader.GetAttribute ("Flavour"), 
+							reader.GetAttribute ("Description")));
+						break;
+					case "Arms":
+						armsCards.Add (reader.GetAttribute ("Name"), new ArmsCard (reader.GetAttribute ("Name"), reader.GetAttribute ("Flavour"),
+							reader.GetAttribute ("AT"), reader.GetAttribute ("ST"), reader.GetAttribute ("Description"), 
+							System.Convert.ToInt32 (reader.GetAttribute ("HPboost")), System.Convert.ToInt32 (reader.GetAttribute ("Aboost")),
+							System.Convert.ToInt32 (reader.GetAttribute ("Sboost"))));
+						break;
+					case "Creature":
+						creatureCards.Add (reader.GetAttribute ("Name"), new CreatureCard (reader.GetAttribute ("Name"), reader.GetAttribute ("Ability"), 
+							reader.GetAttribute ("CardEffect"), reader.GetAttribute ("ST"), reader.GetAttribute ("AT"), reader.GetAttribute ("Flavour"),
+							System.Convert.ToInt32 (reader.GetAttribute ("HP")), System.Convert.ToInt32 (reader.GetAttribute ("AV")), 
+							System.Convert.ToInt32 (reader.GetAttribute ("SV"))));
+						break;
+					case "SpellEffect":
+						spellEffects.Add (reader.GetAttribute ("Name"), new SpellEffect (reader.GetAttribute ("Name"), reader.GetAttribute ("AT"),
+							System.Convert.ToInt32 (reader.GetAttribute ("AV"))));
+						break;
+					case "CardAbility":
+						effects.Add (reader.GetAttribute ("Name"), new CardEffect (reader.GetAttribute ("Name"), reader.GetAttribute ("ST"), 
+							reader.GetAttribute ("AT"), System.Convert.ToInt32 (reader.GetAttribute ("SV")), System.Convert.ToInt32 (reader.GetAttribute ("AV")),
+							System.Convert.ToInt32 (reader.GetAttribute ("Duration")), System.Convert.ToInt32 (reader.GetAttribute ("Hp"))));
+						break;
+					case "CardEffect":
+						abilities.Add (reader.GetAttribute ("Name"), new CardAbility (reader.GetAttribute ("Name"), reader.GetAttribute ("ST"), 
+							reader.GetAttribute ("AT"), System.Convert.ToInt32 (reader.GetAttribute ("SV")), System.Convert.ToInt32 (reader.GetAttribute ("AV")),
+							System.Convert.ToInt32 (reader.GetAttribute ("Duration")), System.Convert.ToInt32 (reader.GetAttribute ("HP"))));
+						break;
+					}
+					break;
+					
+				}
+			}
+		}
 	}
 	
 	// Update is called once per frame
