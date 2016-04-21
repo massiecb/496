@@ -9,11 +9,11 @@ public class CardClicked : MonoBehaviour {
 		handler = GameObject.Find("GamePlay").GetComponent<CardEventHandler>();
 	}
 	void OnMouseDown(){
-		if (transform.parent.name.Contains ("Hand") && !transform.parent.name.Contains("View"))
+		if (transform.parent.name.Contains ("Player1Hand") && !transform.parent.name.Contains("View"))
 			handler.HandCardEvent (transform.gameObject);
-		else if (transform.parent.name.Contains ("Tactics") && !transform.parent.name.Contains ("View"))
+		else if (transform.parent.name.Contains ("Player1Tactics") && !transform.parent.name.Contains ("View"))
 			handler.TacticsCardEvent (transform.gameObject);
-		else if (transform.parent.name.Contains ("Creatures") && !transform.parent.name.Contains ("View"))
+		else if (transform.parent.name.Contains ("Player1Creatures") && !transform.parent.name.Contains ("View"))
 			handler.CreatureCardEvent (transform.gameObject);
 	}
 }

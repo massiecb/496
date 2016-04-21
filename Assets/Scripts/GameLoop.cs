@@ -13,11 +13,14 @@ public class GameLoop : MonoBehaviour {
 	public List <string> player1Deck;
 	public List <string> player1Hand;
 	public List <string> stack;
+	public List <string> player2Deck;
+	public List <string> player2Hand;
 	int STARTINGHAND = 3;
 	int MAXHAND = 5;
 	int handCount;
-	public GameObject creaturePrefab, spellPreFab, armsPrefab;
-	GameObject player1HandObject;
+	public GameObject creaturePrefab, spellPreFab, armsPrefab, cardBackPrefab;
+	GameObject player1HandObject, player2HandObject, player1ViewHand, player2ViewHand;
+	public Camera player1, player2;
 
 	void Awake(){
 		using (XmlReader reader = XmlReader.Create (new StreamReader (Application.persistentDataPath + "/Decks/DeckList.xml"))) {
@@ -42,14 +45,24 @@ public class GameLoop : MonoBehaviour {
 		}
 		player1Deck = line.Split (',').ToList<string> ();
 		player1Deck.RemoveAt (player1Deck.Count - 1);
+		player2Deck = line.Split (',').ToList<string> ();
+		player2Deck.RemoveAt (player2Deck.Count-1);
 		RandomizeDeck (player1Deck);
+		RandomizeDeck (player2Deck);
 		DrawStartingHands (player1Deck, player1Hand);
+		DrawStartingHands (player2Deck, player2Hand);
 	}
 	// Use this for initialization
 	void Start () {
+		player1.enabled = true;
+		player2.enabled = false;
 		CL = GameObject.Find ("CardLoader").GetComponent<CardLoader> ();
 		player1HandObject = GameObject.Find ("Player1Hand");
-		DisplayHand (player1HandObject, player1Hand);
+		player1ViewHand = GameObject.Find ("Player1ViewHand");
+		player2HandObject = GameObject.Find ("Player2Hand");
+		player2ViewHand = GameObject.Find ("Player2ViewHand");
+		DisplayHand (player1HandObject, player2ViewHand, player1Hand);
+		DisplayHand (player2HandObject, player1ViewHand, player2Hand);
 	}
 	
 	// Update is called once per frame
@@ -79,9 +92,15 @@ public class GameLoop : MonoBehaviour {
 		}
 	}
 
-	public void DisplayHand(GameObject handObject, List<string> hand){
+	public void DisplayHand(GameObject handObject, GameObject viewObject, List<string> hand){
 		Vector3 handPosition = handObject.transform.position - new Vector3 (30, 0, 1);
+		Vector3 viewPosition = viewObject.transform.position - new Vector3 (30, 0, 1);
+
 		foreach (string s in hand) {
+			GameObject cardBack = GameObject.Instantiate (cardBackPrefab);
+			cardBack.transform.parent = viewObject.transform;
+			cardBack.transform.position = viewPosition;
+			viewPosition.x = viewPosition.x + 8;
 			if (CL.creatureCards.ContainsKey (s)) {
 				GameObject temp = GameObject.Instantiate (creaturePrefab);
 				temp.transform.GetChild (0).GetComponent<TextMesh> ().text = s;

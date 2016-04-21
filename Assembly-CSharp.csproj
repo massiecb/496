@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\DeckMaker.cs" />
      <Compile Include="Assets\Scripts\FirstScreen.cs" />
      <Compile Include="Assets\Scripts\GameLoop.cs" />
+     <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\Prototype\AccessPrefabTest.cs" />
      <Compile Include="Assets\Scripts\Prototype\CardLoaderAlpha.cs" />
      <Compile Include="Assets\Scripts\Prototype\GameLoop1.cs" />
