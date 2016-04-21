@@ -45,10 +45,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CardClicked.cs" />
+     <Compile Include="Assets\Scripts\CardEventHandler.cs" />
      <Compile Include="Assets\Scripts\CardLoader.cs" />
+     <Compile Include="Assets\Scripts\DeckLoader.cs" />
+     <Compile Include="Assets\Scripts\DeckMaker.cs" />
      <Compile Include="Assets\Scripts\FirstScreen.cs" />
+     <Compile Include="Assets\Scripts\GameLoop.cs" />
+     <Compile Include="Assets\Scripts\Prototype\AccessPrefabTest.cs" />
      <Compile Include="Assets\Scripts\Prototype\CardLoaderAlpha.cs" />
-     <None Include="Assets\Resources\CardFile\CardInfo.xml" />
+     <Compile Include="Assets\Scripts\Prototype\GameLoop1.cs" />
+     <Compile Include="Assets\Scripts\Prototype\GamePlay1.cs" />
+     <Compile Include="Assets\Scripts\Prototype\HandCardHandler.cs" />
+     <Compile Include="Assets\Scripts\SaveDeck.cs" />
+     <None Include="Assets\Resources\CardFile\cardinfo.xml" />
      <None Include="Assets\Resources\CardFile\CardInfoAlpha.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

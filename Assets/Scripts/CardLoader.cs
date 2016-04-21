@@ -34,6 +34,7 @@ using System.IO;
  * 
  */
 public class CardLoader : MonoBehaviour {
+
 	/*Creature Card Class:
 	 * 		Holds Values for all Creatures. Will be the value in the creatures 
 	 * 		Creature Cards Atributes are outlined above
@@ -57,7 +58,7 @@ public class CardLoader : MonoBehaviour {
 			AV = av;
 			SV = sv;
 		}
-
+		//Get and Set methods
 		public string getName(){
 			return Name;
 		}
@@ -110,6 +111,8 @@ public class CardLoader : MonoBehaviour {
 			Flavour = f;
 			Description = d;
 		}
+
+		//Get and set methods
 		public string getName(){
 			return Name;
 		}
@@ -134,6 +137,7 @@ public class CardLoader : MonoBehaviour {
 			Sboost = sb;
 			Description = d;
 		}
+		// Get and Set methods
 		public string getName(){
 			return Name;
 		}
@@ -248,16 +252,22 @@ public class CardLoader : MonoBehaviour {
 			return AV;
 		}
 	}
-	public static Dictionary <string, SpellEffect> spellEffects;
-	public static Dictionary <string, SpellCard> spellCards;
-	public static Dictionary <string, CreatureCard> creatureCards;
-	public static Dictionary <string, ArmsCard> armsCards;
-	public static Dictionary <string, CardEffect> effects;
-	public static Dictionary <string, CardAbility> abilities;
+	public  Dictionary <string, SpellEffect> spellEffects;
+	public  Dictionary <string, SpellCard> spellCards;
+	public  Dictionary <string, CreatureCard> creatureCards;
+	public  Dictionary <string, ArmsCard> armsCards;
+	public  Dictionary <string, CardEffect> effects;
+	public  Dictionary <string, CardAbility> abilities;
 	
 	// Use this for initialization
 	void Awake () {
-		TextAsset cards = Resources.Load ("CardFile/CardInfo.xml") as TextAsset;
+		spellEffects = new Dictionary<string, SpellEffect>();
+		spellCards = new Dictionary<string, SpellCard> ();
+		creatureCards = new Dictionary<string, CreatureCard> ();
+		armsCards = new Dictionary<string, ArmsCard> ();
+		effects = new Dictionary<string, CardEffect> ();
+		abilities = new Dictionary<string, CardAbility> ();
+		TextAsset cards = Resources.Load ("CardFile/cardinfo") as TextAsset;
 		using (XmlReader reader = XmlReader.Create (new StringReader (cards.text))) {
 			XmlWriterSettings ws = new XmlWriterSettings ();
 			ws.Indent = true;
@@ -286,12 +296,12 @@ public class CardLoader : MonoBehaviour {
 							System.Convert.ToInt32 (reader.GetAttribute ("AV"))));
 						break;
 					case "CardAbility":
-						effects.Add (reader.GetAttribute ("Name"), new CardEffect (reader.GetAttribute ("Name"), reader.GetAttribute ("ST"), 
+						abilities.Add (reader.GetAttribute ("Name"), new CardAbility (reader.GetAttribute ("Name"), reader.GetAttribute ("ST"), 
 							reader.GetAttribute ("AT"), System.Convert.ToInt32 (reader.GetAttribute ("SV")), System.Convert.ToInt32 (reader.GetAttribute ("AV")),
-							System.Convert.ToInt32 (reader.GetAttribute ("Duration")), System.Convert.ToInt32 (reader.GetAttribute ("Hp"))));
+							System.Convert.ToInt32 (reader.GetAttribute ("Duration")), System.Convert.ToInt32 (reader.GetAttribute ("HP"))));
 						break;
 					case "CardEffect":
-						abilities.Add (reader.GetAttribute ("Name"), new CardAbility (reader.GetAttribute ("Name"), reader.GetAttribute ("ST"), 
+						effects.Add (reader.GetAttribute ("Name"), new CardEffect (reader.GetAttribute ("Name"), reader.GetAttribute ("ST"), 
 							reader.GetAttribute ("AT"), System.Convert.ToInt32 (reader.GetAttribute ("SV")), System.Convert.ToInt32 (reader.GetAttribute ("AV")),
 							System.Convert.ToInt32 (reader.GetAttribute ("Duration")), System.Convert.ToInt32 (reader.GetAttribute ("HP"))));
 						break;
@@ -301,10 +311,88 @@ public class CardLoader : MonoBehaviour {
 				}
 			}
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		/*
+		Debug.Log ("***** Testing ****");
+		Debug.Log ("Card Effect");
+		foreach (string key in effects.Keys) {
+			Debug.Log ("------------------------------------------------");
+			Debug.Log ("key = " + key);
+			Debug.Log ("Name ==== " + effects [key].getName ());
+			Debug.Log ("Shield Type ==== " + effects [key].getShieldType());
+			Debug.Log ("Shield Value ==== " + effects [key].getShieldValue ());
+			Debug.Log ("Attack Type ==== " + effects [key].getAttackType ());
+			Debug.Log ("Attack Value ==== " + effects [key].getAttackValue ());
+			Debug.Log ("HP ==== " + effects [key].getHPEffect ());
+			Debug.Log ("Duration ==== " + effects [key].getDuration ());
+			Debug.Log ("-------------------------------------------------");
+
+		}
+		Debug.Log ("**** *****");
+		Debug.Log ("Card Ability");
+		foreach (string key in abilities.Keys) {
+			Debug.Log ("-------------------------------------------------");
+			Debug.Log ("key = " + key);
+			Debug.Log ("Name ===== " + abilities [key].getName ());
+			Debug.Log ("Shield Type ==== " + abilities [key].getShieldType ());
+			Debug.Log ("Shield Value ==== " + abilities [key].getShieldValue ());
+			Debug.Log ("Attack Type ==== " + abilities [key].getAttackType ());
+			Debug.Log ("Attack Value ==== " + abilities [key].getAttackValue ());
+			Debug.Log ("HP ==== " + abilities [key].getHPEffect ());
+			Debug.Log ("Duration ==== " + abilities [key].getDuration ());
+			Debug.Log ("------------------------------------------------");
+		}
+		Debug.Log ("**** ****");
+		Debug.Log ("Spell Effects");
+		foreach (string key in spellEffects.Keys) {
+			Debug.Log ("-------------------------------------------------");
+			Debug.Log ("key = " + key);
+			Debug.Log ("Name ==== " + spellEffects [key].getName ());
+			Debug.Log ("Attack Type ==== " + spellEffects [key].getAttackType ());
+			Debug.Log ("Attack Value ==== " + spellEffects [key].getAttackValue ());
+			Debug.Log ("--------------------------------------------------");
+		}
+		Debug.Log ("**** ****");
+		Debug.Log ("Spell Cards");
+		foreach (string key in spellCards.Keys) {
+			Debug.Log ("------------------------------------------------");
+			Debug.Log ("key = " + key);
+			Debug.Log ("Name ==== " + spellCards [key].getName ());
+			Debug.Log ("Flavour ==== " + spellCards [key].getFlavourText ());
+			Debug.Log ("Description ==== " + spellCards [key].getDescription ());
+			Debug.Log ("------------------------------------------------");
+		}
+		Debug.Log ("**** ****");
+		Debug.Log ("ArmsCards");
+		foreach (string key in armsCards.Keys) {
+			Debug.Log ("------------------------------------------------");
+			Debug.Log ("key = " + key);
+			Debug.Log ("Name ==== " + armsCards [key].getName ());
+			Debug.Log ("Flavour ==== " + armsCards [key].getFlavourText ());
+			Debug.Log ("Description ==== " + armsCards [key].getDescription ());
+			Debug.Log ("Shield Type ==== " + armsCards [key].getShieldType ());
+			Debug.Log ("Shield Value ==== " + armsCards [key].getShieldBoost ());
+			Debug.Log ("Attack Type ==== " + armsCards [key].getAttackType ());
+			Debug.Log ("Attack Value ==== " + armsCards [key].getAttackBoost ());
+			Debug.Log ("HP Value === " + armsCards [key].getHPBoost ());
+			Debug.Log ("------------------------------------------------");
+		}
+		Debug.Log ("**** ****");
+		Debug.Log ("Creature Cards");
+		foreach (string key in creatureCards.Keys) {
+			Debug.Log ("------------------------------------------------");
+			Debug.Log ("key = " + key);
+			Debug.Log ("Name ==== " + creatureCards [key].getName ());
+			Debug.Log ("Flavour ==== " + creatureCards [key].getFlavourText ());
+			Debug.Log ("Card Ability ==== " + creatureCards [key].getAbility ());
+			Debug.Log ("Card Effect === " + creatureCards [key].getCardEffect ());
+			Debug.Log ("Shield Type ==== " + creatureCards [key].getShieldType ());
+			Debug.Log ("Shield Value ==== " + creatureCards [key].getShieldValue ());
+			Debug.Log ("Attack Type ==== " + creatureCards [key].getAttackType ());
+			Debug.Log ("Attack Value ==== " + creatureCards [key].getAttackValue ());
+			Debug.Log ("HP Value ==== " + creatureCards [key].getHP ());
+			Debug.Log ("------------------------------------------------");
+		}*/
+		//DontDestroyOnLoad (transform.root.gameObject);
+
 	}
 }

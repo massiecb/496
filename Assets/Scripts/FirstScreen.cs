@@ -2,24 +2,21 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+
+/* Handles all scene transisions for buttons
+ */ 
+
 public class FirstScreen : MonoBehaviour {
 	public void NewDeck(){
-		SceneManager.LoadScene ("ComingSoon");
+		SceneManager.LoadScene ("DeckBuilding");
 	}
 	public void LoadDeck(){
-		SceneManager.LoadScene ("ComingSoon");
+		SceneManager.LoadScene ("LoadDeck");
 	}
 	public void HomeScreen(){
 		SceneManager.LoadScene ("StartScreen");
 	}
-	// Use this for initialization
-	void Start () {
-
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void ComingSoon(){
+		SceneManager.LoadScene ("ComingSoon");
 	}
 }
