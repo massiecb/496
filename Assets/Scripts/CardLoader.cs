@@ -7,7 +7,7 @@ using System.IO;
 /* Cards:
  *	Creatures:
  *		Attributes: ints: HP, Attack Value, Shield Value
- *					strings: Card Name, Ability, Card Effect, Shield Type, AttackType, Flavour text
+ *					strings: Card Name, Ability, Card Effect, Shield Type, AttackType, Flavour text, Speed
  *  Spell Cards:
  * 		Attributes: String: Name, Flavour Text, Description
  *  Arms Cards:
@@ -45,9 +45,9 @@ public class CardLoader : MonoBehaviour {
 
 	public class CreatureCard {
 		public string Name, Ability, CardEffect, ST, AT, Flavour;
-		public int HP, AV, SV;
+		public int HP, AV, SV, SP;
 
-		public CreatureCard (string n, string a, string ce, string st, string at, string f, int hp, int av, int sv){
+		public CreatureCard (string n, string a, string ce, string st, string at, string f, int hp, int av, int sv, int sp){
 			Name = n;
 			Ability = a;
 			CardEffect = ce;
@@ -57,6 +57,7 @@ public class CardLoader : MonoBehaviour {
 			HP = hp;
 			AV = av;
 			SV = sv;
+			SP = sp;
 		}
 		//Get and Set methods
 		public string getName(){
@@ -86,6 +87,9 @@ public class CardLoader : MonoBehaviour {
 		public int getShieldValue(){
 			return SV;
 		}
+		public int getSpeed(){
+			return SP;
+		}
 		public void setAttackType(string type){
 			AT = type;
 		}
@@ -100,6 +104,9 @@ public class CardLoader : MonoBehaviour {
 		}
 		public void setHPValue(int n){
 			HP = n;
+		}
+		public void setSpeed(int n){
+			SP = n;
 		}
 	}
 
@@ -289,7 +296,7 @@ public class CardLoader : MonoBehaviour {
 						creatureCards.Add (reader.GetAttribute ("Name"), new CreatureCard (reader.GetAttribute ("Name"), reader.GetAttribute ("Ability"), 
 							reader.GetAttribute ("CardEffect"), reader.GetAttribute ("ST"), reader.GetAttribute ("AT"), reader.GetAttribute ("Flavour"),
 							System.Convert.ToInt32 (reader.GetAttribute ("HP")), System.Convert.ToInt32 (reader.GetAttribute ("AV")), 
-							System.Convert.ToInt32 (reader.GetAttribute ("SV"))));
+							System.Convert.ToInt32 (reader.GetAttribute ("SV")), System.Convert.ToInt32 (reader.GetAttribute("SP"))));
 						break;
 					case "SpellEffect":
 						spellEffects.Add (reader.GetAttribute ("Name"), new SpellEffect (reader.GetAttribute ("Name"), reader.GetAttribute ("AT"),

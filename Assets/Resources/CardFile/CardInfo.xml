@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CardCollection>
-  <Spell Name = "Counter Spell" Flavour = "Only Jerks splash blue" Description = "Causes target spell to not occur"/>
   <Spell Name = "Burn" Flavour = "It doesn't cook" Description = "Deals two damage to target" />
   <Spell Name = "Literal Burn" Flavour = "Meat, Fire, Good" Description = "Deals two fire damage" />
   <Spell Name = "Freeze" Flavour = "Freezies aren't as good as you think" Description = "Stops target creature from doing any action" />
@@ -18,15 +17,15 @@
 	AT = "fire" ST = "none" HPboost = "0" Aboost = "0" Sboost = "0" />
 
   <Creature Name = "Big Friendly Guy" Flavour = "Every game needs a BFG" Ability = "none" CardEffect = "Swap" ST = "none"
-	    AT = "physical" HP = "3" AV = "4" SV = "0" />
+	    AT = "physical" HP = "3" AV = "4" SV = "0" SP = "1" />
   <Creature Name = "Standard Smallie" Flavour = "Your Pawn" Ability = "none" CardEffect = "none" ST = "none"
-	    AT = "physical" HP = "1" AV = "1" SV = "0" />
+	    AT = "physical" HP = "1" AV = "1" SV = "0" SP = "3" />
   <Creature Name = "Not as Standard Smallie" Flavour = "A variation on a theme" Ability = "Firey Stamina" CardEffect = "none" ST = "none"
-	    AT = "phyiscal" HP = "1" AV = "1" SV = "0" />
+	    AT = "phyiscal" HP = "1" AV = "1" SV = "0" SP = "3" />
   <Creature Name = "Medium Guy"  Flavour = "A small step for a smallie..." Ability = "none" CardEffect = "Health Boost" ST = "fire"
-	    AT = "physical" HP = "1" AV = "2" SV = "1" />
+	    AT = "physical" HP = "1" AV = "2" SV = "1" SP = "2" />
   <Creature Name = "Caster" Flavour = "Zounds!" Ability = "Pump Up" CardEffect = "Fireball" ST = "physical"
-	    AT = "phyiscal" HP = "1" AV = "1" SV = "1" />
+	    AT = "phyiscal" HP = "1" AV = "1" SV = "1" SP = "1" />
   
   <CardAbility Name ="Swap" ST ="none" AT = "phyiscal" SV = "0" AV = "1" HP="-1" Duration="0"/>
   <CardAbility Name ="Firey Stamina" ST="fire" AT="none" SV="1" AV="0" HP="0" Duration="0" />

@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CardClicked.cs" />
+     <Compile Include="Assets\Scripts\CardClickedP2.cs" />
      <Compile Include="Assets\Scripts\CardEventHandler.cs" />
+     <Compile Include="Assets\Scripts\CardEventHandlerP2.cs" />
      <Compile Include="Assets\Scripts\CardLoader.cs" />
      <Compile Include="Assets\Scripts\DeckLoader.cs" />
      <Compile Include="Assets\Scripts\DeckMaker.cs" />
@@ -59,6 +61,7 @@
      <Compile Include="Assets\Scripts\Prototype\GamePlay1.cs" />
      <Compile Include="Assets\Scripts\Prototype\HandCardHandler.cs" />
      <Compile Include="Assets\Scripts\SaveDeck.cs" />
+     <Compile Include="Assets\Scripts\TurnButtonEvent.cs" />
      <None Include="Assets\Resources\CardFile\cardinfo.xml" />
      <None Include="Assets\Resources\CardFile\CardInfoAlpha.xml" />
  <Reference Include="UnityEngine.UI">
