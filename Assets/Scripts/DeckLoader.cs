@@ -43,7 +43,7 @@ public class DeckLoader : MonoBehaviour {
 					break;
 				case XmlNodeType.Text:
 					// Get the text that is associated with the deck
-					Debug.Log (reader.Value);
+					//Debug.Log (reader.Value);
 					line = reader.Value;
 					break;
 				}

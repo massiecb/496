@@ -19,4 +19,7 @@ public class FirstScreen : MonoBehaviour {
 	public void ComingSoon(){
 		SceneManager.LoadScene ("ComingSoon");
 	}
+	public void GameScreen(){
+		SceneManager.LoadScene ("GamePlay");
+	}
 }

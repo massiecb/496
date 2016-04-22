@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CardCollection>
+  <Spell Name = "Counter Spell" Flavour = "Only Jerks splash blue" Description = "Causes target spell to not occur"/>
   <Spell Name = "Burn" Flavour = "It doesn't cook" Description = "Deals two damage to target" />
   <Spell Name = "Literal Burn" Flavour = "Meat, Fire, Good" Description = "Deals two fire damage" />
   <Spell Name = "Freeze" Flavour = "Freezies aren't as good as you think" Description = "Stops target creature from doing any action" />
