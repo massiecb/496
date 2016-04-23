@@ -119,6 +119,9 @@ public class GameLoop : MonoBehaviour {
 					}
 				}
 			}
+			if (numPlayer1Creatures > 0 && numPlayer2Creatures > 0) {
+				CreatureFight (stack);
+			}
 		}
 	}
 
@@ -274,6 +277,78 @@ public class GameLoop : MonoBehaviour {
 			if (hand.Count-1 <= MAXHAND){
 				hand.Add (deck [deck.Count - 1]); // add card to hand
 				deck.Remove (hand [hand.Count - 1]); // remove card from deck
+			}
+		}
+	}
+
+	public void CreatureFight(List <GameObject> cards){
+
+		/* Allows creatures to fight each other.
+		 *  The fastest ones target each other for the round and deal damage to the HP based upon their attack
+		 *  The card itself is updated since it holds all the information for this instance of the card. It is entirely mutable 
+		 *  while the dicitonary in CL contains the original values
+		 * 
+		 * Uses a list of strings cards, which it traverses, finds the fastest cards, makes them fight, and then removes them from the list if 
+		 * they die. Also removes the cards from the board
+		 * 
+		 * Bug: does not remove card from opponent palyer's board
+		 */ 
+		GameObject p1Fastest = null; // Player1's fastest creature
+		GameObject p2Fastest = null; // Player2's fastest creautre
+		int p1HP, p2HP, p1AV, p2AV; // the HP and attack values (AV) for each player's fastest creature
+		foreach (GameObject g in cards) {
+			// go through list
+			if (g.tag.Contains ("P1")) {
+				// if a previous minion has not been chosen, then make this one the fastest
+				if (p1Fastest == null) {
+					p1Fastest = g;
+				} 
+				else if (System.Convert.ToInt32 (p1Fastest.transform.GetChild (7)) < System.Convert.ToInt32 (g.transform.GetChild (7))){
+					// if a previous creature has been chosen, if the new creature is faster than the old creature, then set the fastest creature
+					// to the new one, else, leave the old one as fastest
+					p1Fastest = g;
+				}
+			}
+			if (g.tag.Contains ("P2")) {
+				// if a previous minion has not been chosen, then make this one the fastest
+				if (p2Fastest == null) {
+					p2Fastest = g;
+				}
+				else if (System.Convert.ToInt32 (p2Fastest.transform.GetChild (7)) < System.Convert.ToInt32 (g.transform.GetChild (7))){
+					// if a previous creature has been chosen, if the new creature is faster than the old creature, then set the fastest creature
+					// to the new one, else, leave the old one as fastest
+					p2Fastest = g;
+				}
+			}
+		}
+		if (p2Fastest != null && p1Fastest != null) {
+			//if we have found minions
+			p1AV = System.Convert.ToInt32 (p1Fastest.transform.GetChild (3).GetComponent<TextMesh>().text); // get player1's fastest minions attack
+			p1HP = System.Convert.ToInt32 (p1Fastest.transform.GetChild (6).GetComponent<TextMesh>().text); // get player1's fastest minions health points
+
+			// repeat for player2's minions
+			p2AV = System.Convert.ToInt32 (p2Fastest.transform.GetChild (3).GetComponent<TextMesh>().text);
+			p2HP = System.Convert.ToInt32 (p2Fastest.transform.GetChild (6).GetComponent<TextMesh>().text);
+
+			// deal damage to each other
+			p2HP = p2HP - p1AV;
+			p1HP = p1HP - p2AV;
+
+			//update the card to reflect the damage
+			p1Fastest.transform.GetChild (6).GetComponent<TextMesh> ().text = p1HP.ToString();
+			p2Fastest.transform.GetChild (6).GetComponent<TextMesh> ().text = p2HP.ToString ();
+
+			if (p2HP <= 0) {
+				// if player2's creature's HP drops below 0, then it is dead and can be removed from the game
+				stack.Remove (p2Fastest);
+				Destroy (p2Fastest);
+				numPlayer2Creatures -= 1;
+			}  
+			if (p1HP <= 0) {
+				// if player1's creature's HP drops below 0, then it is dead and can be removed from the game
+				stack.Remove (p1Fastest);
+				Destroy (p1Fastest);
+				numPlayer1Creatures -= 1;
 			}
 		}
 	}

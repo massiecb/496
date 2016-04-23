@@ -16,12 +16,15 @@ There is also a cardback prefab to display that to the opponent when the card is
 
 What Isn’t Implemented:
 
+Creatures can’t attack each other: really important. each creature should be able to attack the opposing player’s creatures or else the game can’t end as creatures act as blockers. It was not clear in the document if the attacker gets to choose which creatures to hit or if the defender does. I
+Spell cards don’t work: Spell cards and arms cards can’t target or do anything when placed on the stack. Spell and arms cards effects are
+created and accessible by using their name for their respective dicitonary. YOu would then apply these effects onto the target card, however
+targetting is decided to work
 
 Can only use one deck: Changes required to deck building and the selection deck, but the framework is there to add the ability.
 
 
-Some Display Bugs: cards will sometimes not display, sometimes will jump to another part of the player’s field. The parenting is correct however. I assume some bugs are due to lag my laptop causes. Requires further testing. When Creatures attack each other, the player whose creature wins does
-not see the enemy creature removed from the stack but can still attack correctly
+Some Display Bugs: cards will sometimes not display, sometimes will jump to another part of the player’s field. The parenting is correct however. I assume some bugs are due to lag my laptop causes. Requires further testing
 
 Needs more cards: Actual cards would be good. I just made up a bunch with what I thought would be standard. No cards have art either.
 
