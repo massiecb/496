@@ -11,7 +11,11 @@ public class FirstScreen : MonoBehaviour {
 		SceneManager.LoadScene ("DeckBuilding");
 	}
 	public void LoadDeck(){
-		SceneManager.LoadScene ("LoadDeck");
+		//Debug.Log (System.IO.File.Exists (Application.persistentDataPath + "/Decks/DeckList.xml"));
+		if (System.IO.File.Exists (Application.persistentDataPath + "/Decks/DeckList.xml")) {
+			SceneManager.LoadScene ("LoadDeck");
+		} else
+			SceneManager.LoadScene ("DeckBuilding");
 	}
 	public void HomeScreen(){
 		SceneManager.LoadScene ("StartScreen");
